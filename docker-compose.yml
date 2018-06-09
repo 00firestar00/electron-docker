@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+
+  electron:
+    user: node
+    build: ./
+    container_name: electron
+    volumes:
+      - ./electron:/app:rw
+      - /tmp/.X11-unix:/tmp/.X11-unix:z
+      - /run/user/1000/wayland-0:/tmp/wayland-0:z
+    environment:
+      - DISPLAY=unix:0
+      - XDG_RUNTIME_DIR=/tmp
+      - WAYLAND_DISPLAY=wayland-0
+    command: yarn start
